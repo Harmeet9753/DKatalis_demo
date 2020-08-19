@@ -1,6 +1,9 @@
+import 'package:dkatalisdemo/ui/password_screen.dart';
 import 'package:dkatalisdemo/utils/app_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'custom_progress_indicator.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -32,10 +35,16 @@ class WelcomeScreen extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
 
+      resizeToAvoidBottomPadding: false,
       body: Stack(
         children: <Widget>[
           Container(
+            height: 200,
             color: Colors.blue,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: CustomProgressIndicator(),
+            ),
           ),
           Padding(padding: EdgeInsets.fromLTRB(0, 200, 0, 0),
 
@@ -62,7 +71,7 @@ class WelcomeScreen extends StatelessWidget{
                     Spacer(flex: 1,),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      child: nextButton(),
+                      child: nextButton(context),
                     )
                   ],
                 ),
@@ -101,12 +110,13 @@ class WelcomeScreen extends StatelessWidget{
     );
   }
 
-  Widget nextButton() {
+  Widget nextButton(BuildContext context) {
     return SizedBox(
         width: double.infinity,
         child: RaisedButton(
           onPressed: () {
-
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=>PasswordScreen()));
           },
           color: Colors.blue,
           child: Text(AppConstants.TEXT_NEXT,
@@ -118,4 +128,6 @@ class WelcomeScreen extends StatelessWidget{
           padding: EdgeInsets.all(15.0),
         ));
   }
+  
+
 }
