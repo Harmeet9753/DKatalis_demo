@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 class CustomProgressIndicator extends StatefulWidget{
 
+  int progressCount;
+
+  CustomProgressIndicator({this.progressCount});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -19,13 +23,13 @@ class CustomProgressState extends State<CustomProgressIndicator>{
 
       children: <Widget>[
 
-        circularContainer('1'),
+        circularContainer(1,widget.progressCount),
         lineSeperator(),
-        circularContainer('2'),
+        circularContainer(2,widget.progressCount),
         lineSeperator(),
-        circularContainer('3'),
+        circularContainer(3,widget.progressCount),
         lineSeperator(),
-        circularContainer('4'),
+        circularContainer(4,widget.progressCount),
 
       ],
     );
@@ -33,18 +37,18 @@ class CustomProgressState extends State<CustomProgressIndicator>{
 
 
 
-  Widget circularContainer(String text){
+  Widget circularContainer(int value,int progressCount){
 
     return Container(
 
       width: 50,
       height: 50,
       child: Center(
-        child: Text(text,style: TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),),
+        child: Text('$value',style: TextStyle(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),),
       ),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.white,
+        color: (value<=progressCount)?Colors.green:Colors.white,
         border: Border.all(color: Colors.black,width: 2.0)
       ),
     );

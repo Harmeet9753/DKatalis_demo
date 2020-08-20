@@ -12,7 +12,27 @@ class ScheduleCallScreen extends StatefulWidget{
   }
 }
 
-class ScheduleState extends State<ScheduleCallScreen>{
+class ScheduleState extends State<ScheduleCallScreen> with TickerProviderStateMixin{
+
+  AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    )
+      ..forward()
+      ..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +54,7 @@ class ScheduleState extends State<ScheduleCallScreen>{
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-              child: CustomProgressIndicator(),
+              child: CustomProgressIndicator(progressCount: 3,),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0,0, 0),
@@ -168,6 +188,35 @@ class ScheduleState extends State<ScheduleCallScreen>{
   Widget calendarAnimatedWidget(){
 
     return Container(
+      color: Colors.blue,
+      child: AnimatedBuilder(
+          animation: animationController,
+          builder: (context, child) {
+            return Container(
+              decoration: ShapeDecoration(
+                color: Colors.white.withOpacity(0.5),
+                shape: CircleBorder(),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(8.0 * animationController.value),
+                child: child,
+              ),
+            );
+          },
+          child: Container(
+            decoration: ShapeDecoration(
+              color: Colors.white,
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              onPressed: () {},
+              color: Colors.blue,
+              icon: Icon(Icons.calendar_today, size: 24),
+            ),
+          ),
+        ),
+
+    )/*Container(
 
       width: 80,
       height: 80,
@@ -189,6 +238,6 @@ class ScheduleState extends State<ScheduleCallScreen>{
         shape: BoxShape.circle,
         color: Colors.blue[300]
       ),
-    );
+    )*/;
   }
 }

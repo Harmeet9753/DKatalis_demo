@@ -37,7 +37,7 @@ class PaswwordState extends State<PasswordScreen>{
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-              child: CustomProgressIndicator(),
+              child: CustomProgressIndicator(progressCount: 1,),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
               child: Text(AppConstants.TEXT_CREATE_PASSWORD,

@@ -40,7 +40,7 @@ class PersonalInfoState extends State<PersonalInfoScreen>{
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-              child: CustomProgressIndicator(),
+              child: CustomProgressIndicator(progressCount: 2,),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
               child: Text(AppConstants.TEXT_PERSONAL_INFO,
